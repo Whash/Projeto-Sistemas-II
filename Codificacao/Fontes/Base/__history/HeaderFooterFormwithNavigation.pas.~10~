@@ -1,0 +1,40 @@
+unit HeaderFooterFormwithNavigation;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Graphics, FMX.Forms, FMX.Dialogs, FMX.TabControl, System.Actions, FMX.ActnList,
+  FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation;
+
+type
+  TfrmPrincipal = class(TForm)
+    actlstPrincipal: TActionList;
+    tlbPrincipal: TToolBar;
+    lblPrincipal: TLabel;
+    tbcPrincipal: TTabControl;
+    tbiPrincipal: TTabItem;
+    pnlPrincipal: TPanel;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.fmx}
+{$R *.LgXhdpiPh.fmx ANDROID}
+{$R *.iPhone4in.fmx IOS}
+
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
+begin
+  { This defines the default active tab at runtime }
+  TabControl1.First(TTabTransition.None);
+end;
+
+end.

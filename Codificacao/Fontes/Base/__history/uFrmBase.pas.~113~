@@ -1,0 +1,207 @@
+unit uFrmBase;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Graphics, FMX.Forms, FMX.Dialogs, FMX.TabControl, System.Actions, FMX.ActnList,
+  FMX.Objects, FMX.StdCtrls, FMX.Controls.Presentation, FMX.Edit, FMX.DialogService,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.UI.Intf,
+  FireDAC.Phys.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool, FireDAC.Stan.Async,
+  FireDAC.Phys, FireDAC.FMXUI.Wait, Data.DB, FireDAC.Comp.Client, uDmCon, 
+  FireDAC.Comp.DataSet;
+
+type
+  TfrmBase = class(TForm)
+    actlstPrincipal: TActionList;
+    tlbTopoPrincipal: TToolBar;
+    lblTopoPrincipal: TLabel;
+    tbcPrincipal: TTabControl;
+    tbiPrincipal: TTabItem;
+    pnlPrincipal: TPanel;
+    rctnglTopoPrincipal: TRectangle;
+    edtCodigo: TEdit;
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    conLocal: TFDConnection;
+    { Public declarations }
+    function selectRecord(Campos, Tabela, Inner, Where, OrderBy: string): TFDDataSet; virtual;
+    function insertRecord(Tabela, Campos, Valores: string): Boolean; virtual;
+    function updateRecord(Tabela, CampoValores, Where: string): Boolean; virtual;
+    function deleteRecord(Tabela, Where: string): Boolean; virtual;
+
+  end;
+
+var
+  frmBase: TfrmBase;
+
+implementation
+
+{$R *.fmx}
+{$R *.LgXhdpiPh.fmx ANDROID}
+{$R *.iPhone4in.fmx IOS}
+
+{ TfrmBase }
+
+{ TfrmBase }
+
+function TfrmBase.deleteRecord(Tabela, Where: string): Boolean;
+var
+  qryDeleteRecord: TFDQuery;
+  cmdSQL: string;
+begin
+  try
+    try
+      qryDeleteRecord := TFDQuery.Create(nil);
+      qryDeleteRecord.Connection := conLocal;
+      qryDeleteRecord.Close;
+
+      cmdSQL := '';
+      cmdSQL := cmdSQL + '  DELETE  ';
+      cmdSQL := cmdSQL + '  FROM    ';
+      cmdSQL := cmdSQL + Tabela;
+      cmdSQL := cmdSQL + '  WHERE   ';
+      cmdSQL := cmdSQL + '    1 = 1 ';
+      cmdSQL := cmdSQL + Where;
+
+      qryDeleteRecord.SQL.Text := cmdSQL;
+      qryDeleteRecord.ExecSQL;
+
+      Result := True;
+    except
+      on E: Exception do
+      begin
+        Result := False;
+        E.Message := E.Message + ' - ' + Self.ClassName+'.deleteRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmBase.FormShow(Sender: TObject);
+begin
+  try
+    try
+      conLocal := dmCon.conLocal;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.FormShow;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+function TfrmBase.insertRecord(Tabela, Campos, Valores: string): Boolean;
+var
+  qryInsertRecord: TFDQuery;
+  cmdSQL: string;
+begin
+  try
+    try
+      qryInsertRecord := TFDQuery.Create(nil);
+      qryInsertRecord.Connection := conLocal;
+      qryInsertRecord.Close;
+
+      cmdSQL := '';
+      cmdSQL := cmdSQL + '  INSERT  ';
+      cmdSQL := cmdSQL + '  INTO    '; 
+      cmdSQL := cmdSQL + Tabela;
+      cmdSQL := cmdSQL + '  (       ';
+      cmdSQL := cmdSQL + Campos;
+      cmdSQL := cmdSQL + '  )       ';
+      cmdSQL := cmdSQL + '  VALUES  ';
+      cmdSQL := cmdSQL + '  (       ';
+      cmdSQL := cmdSQL + Valores;
+      cmdSQL := cmdSQL + '  )       ';
+
+      qryInsertRecord.SQL.Text := cmdSQL;
+      qryInsertRecord.ExecSQL;
+
+      Result := True;
+    except
+      on E: Exception do
+      begin
+        Result := False;
+        E.Message := E.Message + ' - ' + Self.ClassName+'.insertRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+function TfrmBase.selectRecord(Campos, Tabela, Inner, Where: string): TFDDataSet;
+var
+  qrySelectRecord: TFDQuery;
+  cmdSQL: string;
+begin
+  try
+    try
+      qrySelectRecord := TFDQuery.Create(nil);
+      qrySelectRecord.Connection := conLocal;
+      qrySelectRecord.Close;
+
+      cmdSQL := '';
+      cmdSQL := cmdSQL + '  SELECT    ';
+      cmdSQL := cmdSQL + Campos;
+      cmdSQL := cmdSQL + '  FROM      ';
+      cmdSQL := cmdSQL + Tabela;
+      cmdSQL := cmdSQL + Inner;
+      cmdSQL := cmdSQL + '  WHERE     ';
+      cmdSQL := cmdSQL + '    1 = 1   ';
+      cmdSQL := cmdSQL + Where;
+
+      qrySelectRecord.SQL.Text := cmdSQL;
+      qrySelectRecord.Open;
+
+      Result := qrySelectRecord;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.selectRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+function TfrmBase.updateRecord(Tabela, CampoValores, Where: string): Boolean;
+var
+  qryUpdateRecord: TFDQuery;
+  cmdSQL: string;
+begin
+  try
+    try
+      qryUpdateRecord := TFDQuery.Create(nil);
+      qryUpdateRecord.Connection := conLocal;
+      qryUpdateRecord.Close;
+
+      cmdSQL := '';
+      cmdSQL := cmdSQL + '  UPDATE  ';
+      cmdSQL := cmdSQL + Tabela;
+      cmdSQL := cmdSQL + '  SET     ';
+      cmdSQL := cmdSQL + CampoValores;
+      cmdSQL := cmdSQL + '  WHERE   ';
+      cmdSQL := cmdSQL + '  1 = 1   ';
+      cmdSQL := cmdSQL + Where;
+
+      qryUpdateRecord.SQL.Text := cmdSQL;
+      qryUpdateRecord.ExecSQL;
+
+      Result := True;
+    except
+      on E: Exception do
+      begin
+        Result := False;
+        E.Message := E.Message + ' - ' + Self.ClassName+'.updateRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+end.

@@ -1,0 +1,9 @@
+object dmCon: TdmCon
+  OldCreateOrder = False
+  Height = 102
+  Width = 115
+  object conLocal: TFDConnection
+    Left = 40
+    Top = 24
+  end
+end

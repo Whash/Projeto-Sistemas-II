@@ -1,0 +1,166 @@
+unit uFrmQuadroTarefas;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  uFrmBase, System.Actions, FMX.ActnList, FMX.TabControl, FMX.Objects,
+  FMX.Controls.Presentation, FMX.Layouts, FMX.ListBox, FMX.Colors, System.UIConsts,
+  FMX.Edit, uFrmCadQuadroTarefas, FireDAC.Comp.DataSet;
+
+type
+  TfrmQuadroTarefas = class(TfrmBase)
+    crclAddQuadroTarefas: TCircle;
+    lytMsgEmpty: TLayout;
+    lblMsgEmpty: TLabel;
+    lstBoxPrincipal: TListBox;
+    stylbkListItem: TStyleBook;
+    btnAddQuadroTarefas: TSpeedButton;
+    lytPrincipal: TLayout;
+    lytBtn: TLayout;
+    rctnglPrincipal: TRectangle;
+    procedure btnAddQuadroTarefasClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure CustomStylebtnEditarClick(Sender: TObject);
+  private
+    { Private declarations }
+    procedure createItem(Codigo, Nome, Cor: string);
+  public
+    { Public declarations }
+    procedure loadRecords();
+    procedure Teste(Codigo:string);
+
+  end;
+
+var
+  frmQuadroTarefas: TfrmQuadroTarefas;
+
+implementation
+
+{$R *.fmx}
+
+procedure TfrmQuadroTarefas.btnAddQuadroTarefasClick(Sender: TObject);
+begin
+  try
+    try
+      Application.CreateForm(TfrmCadQuadroTarefas, frmCadQuadroTarefas);
+      frmCadQuadroTarefas.Show;
+      //createItem('Teste Item');
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.btnAddQuadroTarefasClick;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmQuadroTarefas.createItem(Codigo, Nome, Cor: string);
+var
+  LItem: TListBoxItem;
+  Botao: TSpeedButton;
+begin
+  try
+    try
+      LItem := TListBoxItem.Create(lstBoxPrincipal);
+      LItem.Text := Nome;
+      LItem.Height := 60;
+      LItem.OnClick := Self.CustomStylebtnEditarClick;
+      LItem.StyleLookup := 'CustomStyle';
+      LItem.StylesData['Circle.Fill.Color']  := StringToAlphaColor(Cor);
+      LItem.StylesData['edtItemCodigo.Text'] := Codigo;
+      LItem.ApplyStyleLookup;
+      lstBoxPrincipal.AddObject(LItem);
+
+      //LItem.StylesData['btnEditar.OnClick']  := frmQuadroTarefas.CustomStylebtnEditarClick;
+      //LItem.StylesData['Circle.Fill.Color'] := StringToAlphaColor(ColorToString(ComboColorBox1.Color));
+      //crclAddQuadroTarefas.OnClick := Self.FunctionTeste; // Adicionar (Sender: TObject) na procedure;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.createItem;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmQuadroTarefas.CustomStylebtnEditarClick(Sender: TObject);
+begin
+  inherited;
+  ShowMessage('Teste');
+end;
+
+procedure TfrmQuadroTarefas.FormShow(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+      // Chama a função de carregar os dados toda vez que a tela aparece;
+      loadRecords();
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.FormShow;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmQuadroTarefas.loadRecords;
+var
+  dsDados: TFDDataset;
+  Campos, Tabela, Inner, Where, OrderBy, Nome, Cor, Codigo: string;
+begin
+  try
+    try
+      lstBoxPrincipal.Items.Clear;
+
+      Campos  := 'CODIGO, NOME, POSICAO, COR';
+      Tabela  := 'QUADRO_TAREFA';
+      Inner   := '';
+      Where   := '';
+      OrderBy := 'ORDER BY POSICAO';
+
+      dsDados := selectRecord(Campos, Tabela, Inner, Where, OrderBy);
+
+      if not dsDados.IsEmpty then
+      begin
+        lytMsgEmpty.Visible := False;
+        dsDados.First;
+
+        while not dsDados.Eof do
+        begin
+          Codigo := dsDados.FieldByName('CODIGO').AsString;
+          Nome   := dsDados.FieldByName('NOME').AsString;
+          Cor    := dsDados.FieldByName('COR').AsString;
+
+          createItem(Codigo, Nome, Cor);
+
+          dsDados.Next;
+        end;
+      end
+      else
+      begin
+        lytMsgEmpty.Visible := True;
+      end;
+
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.loadRecords;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmQuadroTarefas.Teste(Codigo: string);
+begin
+  ShowMessage(Codigo);
+end;
+
+end.

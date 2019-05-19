@@ -1,0 +1,18 @@
+program prjOrganizZer;
+
+
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  uFrmBase in 'Base\uFrmBase.pas' {frmPrincipal},
+  uDmCon in 'Conexao\uDmCon.pas' {dmCon: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
+  Application.CreateForm(TdmCon, dmCon);
+  Application.Run;
+end.

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2019/05/04 00:17:28.000.771,=C:\Users\matet\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/10 20:02:31.000.781,=C:\Users\matet\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/05/10 20:03:23.000.107,C:\Users\matet\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.pas=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/05/10 20:03:23.000.107,C:\Users\matet\OneDrive\Documentos\Embarcadero\Studio\Projects\Unit1.fmx=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2019/05/10 20:04:05.000.137,C:\Users\matet\OneDrive\Documentos\Embarcadero\Studio\Projects\Project1.dproj=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\prjOrganizZer.dproj</Transaction>
+    <Transaction>2019/05/10 20:04:51.000.834,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Banco\BDTAREFAS.sdb3</Transaction>
+    <Transaction>2019/05/10 20:05:14.000.414,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Base\uFrmBase.pas</Transaction>
+    <Transaction>2019/05/10 20:06:06.000.630,D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas=</Transaction>
+    <Transaction>2019/05/10 20:10:17.000.646,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/05/10 20:11:09.000.339,D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Conexao\uDmCon.pas</Transaction>
+    <Transaction>2019/05/10 20:11:09.000.339,D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.dfm=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Conexao\uDmCon.dfm</Transaction>
+    <Transaction>2019/05/11 18:19:31.000.652,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/05/11 18:19:46.000.028,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/05/11 18:20:07.000.731,D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Telas\Quadro_Tarefas\uFrmQuadroTarefas.fmx=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.fmx</Transaction>
+    <Transaction>2019/05/11 18:20:07.000.731,D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Telas\Quadro_Tarefas\uFrmQuadroTarefas.pas=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/05/14 19:07:20.000.853,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/05/14 19:08:07.000.273,D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.fmx=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Telas\Quadro_Tarefas\uFrmCadQuadroTarefas.fmx</Transaction>
+    <Transaction>2019/05/14 19:08:07.000.273,D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Telas\Quadro_Tarefas\uFrmCadQuadroTarefas.pas</Transaction>
+    <Transaction>2019/05/14 19:16:25.000.742,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/05/14 19:16:41.000.835,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Unit1.pas</Transaction>
+    <Transaction>2019/05/14 21:00:52.000.914,=D:\Faculdade\7° Semestre\Projetos de Sistema II\Projeto-Sistemas-II\Codificacao\Fontes\Banco\BDTAREFAS.s3db</Transaction>
+  </Transactions>
+	<ActiveMobileDevice>
+		<NoProfile iOSSimulator="iPhone5" Android=""/>
+	</ActiveMobileDevice>
+</BorlandProject>

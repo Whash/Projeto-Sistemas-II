@@ -1,0 +1,47 @@
+inherited frmCadQuadroTarefas_LgXhdpiPh: TfrmCadQuadroTarefas_LgXhdpiPh
+  ClientHeight = 695
+  ClientWidth = 450
+  DesignerMasterStyle = 3
+  inherited tlbTopoPrincipal: TToolBar
+    Size.Width = 450.000000000000000000
+    inherited rctnglTopoPrincipal: TRectangle
+      Size.Width = 450.000000000000000000
+      inherited lblTopoPrincipal: TLabel
+        Size.Width = 450.000000000000000000
+      end
+    end
+  end
+  inherited tbcPrincipal: TTabControl
+    Size.Width = 450.000000000000000000
+    Size.Height = 647.000000000000000000
+    Sizes = (
+      450s
+      647s)
+    inherited tbiPrincipal: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      inherited pnlPrincipal: TPanel
+        Size.Width = 450.000000000000000000
+        Size.Height = 647.000000000000000000
+        inherited lytButtons: TLayout
+          Position.Y = 576.000000000000000000
+          Size.Width = 450.000000000000000000
+          inherited crclCancelar: TCircle
+            Size.Width = 190.000000000000000000
+            Size.Height = 30.294746398925780000
+          end
+        end
+        inherited lytFormulario: TLayout
+          Size.Width = 450.000000000000000000
+          Size.Height = 576.000000000000000000
+          inherited edtNome: TEdit
+            Size.Width = 323.000000000000000000
+          end
+          inherited nmbrbxPosicao: TNumberBox
+            Size.Width = 323.000000000000000000
+          end
+        end
+      end
+    end
+  end
+end

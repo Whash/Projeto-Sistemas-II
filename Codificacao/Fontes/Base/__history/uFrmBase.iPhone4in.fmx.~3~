@@ -1,0 +1,34 @@
+inherited frmBase_iPhone4in: TfrmBase_iPhone4in
+  ClientHeight = 548
+  ClientWidth = 320
+  DesignerMasterStyle = 0
+  inherited tlbTopoPrincipal: TToolBar
+    Size.Width = 320.000000000000000000
+    Size.Height = 44.000000000000000000
+    inherited rctnglTopoPrincipal: TRectangle
+      Size.Width = 320.000000000000000000
+      Size.Height = 44.000000000000000000
+      inherited lblTopoPrincipal: TLabel
+        Size.Width = 320.000000000000000000
+        Size.Height = 44.000000000000000000
+      end
+    end
+  end
+  inherited tbcPrincipal: TTabControl
+    Size.Width = 320.000000000000000000
+    Size.Height = 504.000000000000000000
+    Sizes = (
+      320s
+      504s)
+    inherited tbiPrincipal: TTabItem
+      Size.Width = 11.000000000000000000
+      Size.Height = 11.000000000000000000
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      inherited pnlPrincipal: TPanel
+        Size.Width = 320.000000000000000000
+        Size.Height = 504.000000000000000000
+      end
+    end
+  end
+end
