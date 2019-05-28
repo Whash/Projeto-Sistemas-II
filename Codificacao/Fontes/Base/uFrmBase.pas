@@ -27,6 +27,8 @@ type
   public
     conLocal: TFDConnection;
     { Public declarations }
+    procedure Defocus();
+    function ColorIsLight(Color: TAlphaColor): Boolean;
     function selectRecord(Campos, Tabela, Inner, Where, OrderBy: string): TFDDataSet; virtual;
     function insertRecord(Tabela, Campos, Valores: string): Boolean; virtual;
     function updateRecord(Tabela, CampoValores, Where: string): Boolean; virtual;
@@ -46,6 +48,38 @@ implementation
 { TfrmBase }
 
 { TfrmBase }
+
+function TfrmBase.ColorIsLight(Color: TAlphaColor): Boolean;
+begin
+  try
+    try
+      Color := TAlphaColorRec.ColorToRGB(Color);
+      Result := ((Color and $FF) + (Color shr 8 and $FF) + (Color shr 16 and $FF))>= $220;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.ColorIsLight;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmBase.Defocus;
+begin
+  try
+    try
+      // Usado para tirar o foco de qualquer campo
+      edtCodigo.SetFocus;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.Defocus;';
+      end;
+    end;
+  finally
+  end;
+end;
 
 function TfrmBase.deleteRecord(Tabela, Where: string): Boolean;
 var
@@ -174,7 +208,7 @@ function TfrmBase.updateRecord(Tabela, CampoValores, Where: string): Boolean;
 var
   qryUpdateRecord: TFDQuery;
   cmdSQL: string;
-begin
+  begin
   try
     try
       qryUpdateRecord := TFDQuery.Create(nil);

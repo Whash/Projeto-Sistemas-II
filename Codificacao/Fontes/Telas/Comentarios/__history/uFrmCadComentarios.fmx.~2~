@@ -1,0 +1,20 @@
+inherited frmCadComentarios: TfrmCadComentarios
+  Caption = 'frmBase1'
+  DesignerMasterStyle = 3
+  inherited tlbTopoPrincipal: TToolBar
+    inherited rctnglTopoPrincipal: TRectangle
+      inherited lblTopoPrincipal: TLabel
+        Text = 'Cadastro de Coment'#225'rios'
+      end
+    end
+  end
+  inherited tbcPrincipal: TTabControl
+    Sizes = (
+      384s
+      519s)
+    inherited tbiPrincipal: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+    end
+  end
+end

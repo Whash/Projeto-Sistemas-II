@@ -1,0 +1,26 @@
+program OrganizZer;
+
+
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  uFrmBase in 'Base\uFrmBase.pas' {frmBase},
+  uDmCon in 'Conexao\uDmCon.pas' {dmCon: TDataModule},
+  uFrmQuadroTarefas in 'Telas\Quadro_Tarefas\uFrmQuadroTarefas.pas' {frmQuadroTarefas},
+  uFrmCadQuadroTarefas in 'Telas\Quadro_Tarefas\uFrmCadQuadroTarefas.pas' {frmCadQuadroTarefas},
+  uFrmEtapas in 'Telas\Etapas\uFrmEtapas.pas' {frmEtapas},
+  uFrmCadEtapas in 'Telas\Etapas\uFrmCadEtapas.pas' {frmCadEtapas};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TdmCon, dmCon);
+  Application.CreateForm(TfrmQuadroTarefas, frmQuadroTarefas);
+  Application.CreateForm(TfrmEtapas, frmEtapas);
+  Application.CreateForm(TfrmBase, frmBase);
+  Application.CreateForm(TfrmCadQuadroTarefas, frmCadQuadroTarefas);
+  Application.CreateForm(TfrmCadEtapas, frmCadEtapas);
+  Application.Run;
+end.

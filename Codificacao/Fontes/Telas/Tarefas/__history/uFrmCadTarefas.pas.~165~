@@ -1,0 +1,468 @@
+unit uFrmCadTarefas;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  uFrmBase, System.Actions, FMX.ActnList, FMX.TabControl, FMX.Edit, FMX.Objects,
+  FMX.Controls.Presentation, FMX.EditBox, FMX.NumberBox, FMX.Layouts,
+  FMX.ScrollBox, FMX.Memo, FMX.ListBox, FireDAC.Comp.DataSet, FMX.ComboEdit, System.StrUtils;
+
+type TDynStringArray = array of string;
+
+type
+  TfrmCadTarefas = class(TfrmBase)
+    btnExcluir: TSpeedButton;
+    btnVoltar: TSpeedButton;
+    lytButtons: TLayout;
+    rndrctSalvar: TRoundRect;
+    btnSalvar: TSpeedButton;
+    lblBtnSalvar: TLabel;
+    lytFormulario: TLayout;
+    edtNome: TEdit;
+    nmbrbxPosicao: TNumberBox;
+    lblNome: TLabel;
+    lblPosicao: TLabel;
+    mmoDescricao: TMemo;
+    lblDescricao: TLabel;
+    lblEtapa: TLabel;
+    cbbEtapa: TComboBox;
+    rctnglPrincipal: TRectangle;
+    edtCodEtapa: TEdit;
+    procedure btnVoltarClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnSalvarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure rctnglPrincipalClick(Sender: TObject);
+    procedure cbbEtapaChange(Sender: TObject);
+  private
+    { Private declarations }
+    procedure closeWindow();
+    procedure loadColors();
+    procedure loadRecord();
+    procedure saveRecord();
+    procedure changeRecord();
+    procedure removeRecord();
+    procedure setCodEtapa();
+    function checkCampos(): Boolean;
+    function loadEtapas(Codigo: string = '0'): TFDDAtaSet;
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadTarefas: TfrmCadTarefas;
+
+implementation
+
+{$R *.fmx}
+
+uses uFrmEtapas;
+
+procedure TfrmCadTarefas.btnExcluirClick(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      removeRecord();
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.btnExcluirClick;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.btnSalvarClick(Sender: TObject);
+var
+  CamposValidos: Boolean;
+begin
+  try
+    try
+      inherited;
+
+      Defocus();
+
+      CamposValidos := checkCampos();
+
+      if CamposValidos then
+      begin
+        if edtCodigo.Text <> '' then
+          changeRecord()
+        else
+          saveRecord();
+      end
+      else
+      begin
+        ShowMessage('Valores inválidos!');
+      end;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.btnSalvarClick;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.btnVoltarClick(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+      closeWindow();
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.btnVoltarClick;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.cbbEtapaChange(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+      setCodEtapa();
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.btnVoltarClick;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.changeRecord;
+var
+  Tabela, CampoValores, Where: string;
+  Atualizado: Boolean;
+begin
+  try
+    try
+      Tabela       := 'TAREFA';
+      CampoValores := 'NOME = ' + QuotedStr(edtNome.Text) + ', POSICAO = ' + QuotedStr(FloatToStr(nmbrbxPosicao.Value)) + ', DESCRICAO = ' + QuotedStr(mmoDescricao.Text);
+      CampoValores := CampoValores + ' COD_ETAPA = ' + QuotedStr(edtCodEtapa.Text);
+      Where        := 'AND CODIGO = ' + QuotedStr(edtCodigo.Text);
+
+      Atualizado := updateRecord(Tabela, CampoValores, Where);
+
+      if Atualizado then
+      begin
+        //ShowMessage('Registro atualizado com sucesso!');
+        closeWindow();
+      end
+      else
+        ShowMessage('Erro ao atualizar o registro!');
+
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.updateRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+function TfrmCadTarefas.checkCampos: Boolean;
+begin
+  try
+    try
+      Result := True;
+
+      if edtNome.Text = '' then
+        Result := False;
+
+      if nmbrbxPosicao.Value = 0 then
+        Result := False;
+
+      if edtCodEtapa.Text = '' then
+        Result := False;
+
+    except
+      on E: Exception do
+      begin
+        Result := False;
+        E.Message := E.Message + ' - ' + Self.ClassName+'.checkCampos;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.closeWindow;
+begin
+  try
+    try
+      frmEtapas.loadRecords();
+      frmTarefas.loadRecords();
+      edtCodigo.Text      := '';
+      edtNome.Text        := '';
+      nmbrbxPosicao.Value := 0;
+      edtCodEtapa.Text    := '';
+      cbbEtapa.Items.Clear;
+      mmoDescricao.Lines.Clear;
+      Self.Close;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.closeWindow;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.FormShow(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+      loadColors();
+      loadRecord();
+
+      if edtCodigo.Text <> '' then
+        btnExcluir.Visible := True
+      else
+        btnExcluir.Visible := False;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.FormShow;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.loadColors;
+begin
+  try
+    try
+      //Pega as cores da tela anterior e atribui nessa
+      btnVoltar.IconTintColor        :=  frmEtapas.lblTopoPrincipal.FontColor;
+      btnExcluir.IconTintColor       :=  frmEtapas.lblTopoPrincipal.FontColor;
+      lblTopoPrincipal.FontColor     :=  frmEtapas.lblTopoPrincipal.FontColor;
+      lblBtnSalvar.FontColor         :=  frmEtapas.lblTopoPrincipal.FontColor;
+      rctnglTopoPrincipal.Fill.Color :=  frmEtapas.rctnglTopoPrincipal.Fill.Color;
+      rndrctSalvar.Fill.Color        :=  frmEtapas.rctnglTopoPrincipal.Fill.Color;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.loadColors;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+function TfrmCadTarefas.loadEtapas(Codigo: string = '0'): TFDDAtaSet;
+var
+  Campo, Tabela, Inner, Where, OrderBy: string;
+  dsDados: TFDDataSet;
+begin
+  try
+    try
+      Campo   := 'CODIGO, COD_QUADRO_TAREFA, NOME, POSICAO';
+      Tabela  := 'ETAPA';
+      Inner   := '';
+      Where   := 'AND COD_QUADRO_TAREFA = ' + QuotedStr(frmEtapas.edtCodigo.Text); // Código do Quadro de Tarefas
+      if Codigo <> '0' then
+        Where := Where + ' AND CODIGO = ' + QuotedStr(Codigo);
+      OrderBy := '';
+
+      dsDados := selectRecord(Campo, Tabela, Inner, Where, OrderBy);
+
+      Result := dsDados;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.loadEtapas;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.loadRecord;
+var
+  Campo, Tabela, Inner, Where, OrderBy: string;
+  dsDados, dsEtapas: TFDDataSet;
+begin
+  try
+    try
+      // Se for a alteração do registro ele carrega os dados
+      // Se não, então pega a posição do último registro
+      if edtCodigo.Text <> '' then
+      begin
+        Campo   := 'CODIGO, NOME, POSICAO, COD_ETAPA, DESCRICAO, PORC_CONCLUIDA';
+        Tabela  := 'TAREFA';
+        Inner   := '';
+        Where   := 'AND CODIGO = ' + QuotedStr(edtCodigo.Text);
+        OrderBy := '';
+
+        dsDados := selectRecord(Campo, Tabela, Inner, Where, OrderBy);
+
+        if not dsDados.IsEmpty then
+        begin
+          edtNome.Text             := dsDados.FieldByName('NOME').AsString;
+          nmbrbxPosicao.Value      := dsDados.FieldByName('POSICAO').AsInteger;
+          edtCodEtapa.Text         := dsDados.FieldByName('COD_ETAPA').AsString;
+          mmoDescricao.Text        := dsDados.FieldByName('DESCRICAO').AsString;
+        end;
+      end
+      else
+      begin
+        Campo   := 'POSICAO';
+        Tabela  := 'TAREFA';
+        Inner   := '';
+        Where   := 'AND COD_ETAPA = ' + QuotedStr(edtCodEtapa.Text);
+        OrderBy := 'ORDER BY CODIGO DESC LIMIT 1';
+
+        dsDados := selectRecord(Campo, Tabela, Inner, Where, OrderBy);
+
+        if not dsDados.IsEmpty then
+        begin
+          nmbrbxPosicao.Value := dsDados.FieldByName('POSICAO').AsInteger + 1;
+        end
+        else
+        begin
+          nmbrbxPosicao.Value := 1;
+        end;
+      end;
+
+      // Carrega todas as etapas
+      dsEtapas := loadEtapas();
+
+      if not dsEtapas.IsEmpty then
+      begin
+        while not dsEtapas.Eof do
+        begin
+
+          cbbEtapa.Items.Add(dsEtapas.FieldByName('CODIGO').AsString + ' - ' + dsEtapas.FieldByName('NOME').AsString);
+          dsEtapas.Next;
+        end;
+      end;
+
+      // Pega os dados da Etapa passada ou carregada e define o Index para ela
+      dsEtapas := loadEtapas(edtCodEtapa.Text);
+      if not dsEtapas.IsEmpty then
+      begin
+        cbbEtapa.ItemIndex :=  cbbEtapa.Items.IndexOf(dsEtapas.FieldByName('CODIGO').AsString + ' - ' + dsEtapas.FieldByName('NOME').AsString);
+      end;
+
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.loadRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.rctnglPrincipalClick(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      Defocus();
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.rctnglPrincpalClick;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.removeRecord;
+var
+  Tabela, Where: string;
+  Deletado: Boolean;
+begin
+  try
+    try
+      Tabela := 'TAREFA';
+      Where  := 'AND CODIGO = ' + QuotedStr(edtCodigo.Text);
+
+      Deletado := deleteRecord(Tabela, Where);
+
+      if Deletado then
+      begin
+        ShowMessage('Registro excluido com sucesso!');
+        closeWindow();
+      end
+      else
+        ShowMessage('Erro ao excluir o registro!');
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.removeRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.saveRecord;
+var
+  Tabela, Campos, Valores: string;
+  Inserido: Boolean;
+begin
+  try
+    try
+      Tabela   := 'TAREFA';
+      Campos   := 'NOME, POSICAO, COD_ETAPA, DESCRICAO, PORC_CONCLUIDA';
+      Valores  := QuotedStr(edtNome.Text) + ', ' + QuotedStr(FloatToStr(nmbrbxPosicao.Value)) + ', ' + QuotedStr(edtCodEtapa.Text) + ', ';
+      Valores  := Valores + QuotedStr(mmoDescricao.Text) + ', ' + QuotedStr('0');
+      Inserido := insertRecord(Tabela, Campos, Valores);
+
+      if Inserido then
+      begin
+        //ShowMessage('Registro inserido com sucesso!');
+        closeWindow();
+      end
+      else
+        ShowMessage('Erro ao inserir o registro!');
+
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.saveRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadTarefas.setCodEtapa;
+begin
+  try
+    try
+      //ShowMessage(cbbEtapa.Items[cbbEtapa.ItemIndex]);
+      if cbbEtapa.ItemIndex >= 0 then
+        edtCodEtapa.Text := StringReplace(SplitString(cbbEtapa.Items[cbbEtapa.ItemIndex], '-')[0], ' ', '', [rfReplaceAll]);
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.setCodEtapa;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+end.

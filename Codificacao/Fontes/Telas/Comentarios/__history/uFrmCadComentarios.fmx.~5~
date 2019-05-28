@@ -1,0 +1,124 @@
+inherited frmCadComentarios: TfrmCadComentarios
+  Caption = 'frmBase1'
+  DesignerMasterStyle = 3
+  inherited tlbTopoPrincipal: TToolBar
+    inherited rctnglTopoPrincipal: TRectangle
+      inherited lblTopoPrincipal: TLabel
+        Text = 'Cadastro de Coment'#225'rios'
+      end
+      object btnExcluir: TSpeedButton
+        Align = FitRight
+        StyledSettings = [Family, Size, Style]
+        IconTintColor = claWhite
+        Position.X = 336.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'trashtoolbutton'
+        Text = 'btnExcluir'
+        TextSettings.FontColor = claWhite
+      end
+      object btnVoltar: TSpeedButton
+        Align = FitLeft
+        IconTintColor = claWhite
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'backtoolbutton'
+      end
+    end
+  end
+  inherited tbcPrincipal: TTabControl
+    Sizes = (
+      384s
+      519s)
+    inherited tbiPrincipal: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      inherited pnlPrincipal: TPanel
+        object rctnglPrincpal: TRectangle
+          Align = Client
+          Fill.Color = claWhitesmoke
+          Size.Width = 384.000000000000000000
+          Size.Height = 519.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          object lytFormulario: TLayout
+            Align = Client
+            Size.Width = 384.000000000000000000
+            Size.Height = 448.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object lblComentario: TLabel
+              Anchors = [akLeft, akTop, akRight]
+              Position.X = 32.000000000000000000
+              Position.Y = 25.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 23.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Coment'#225'rio'
+              TabOrder = 0
+            end
+            object edtCodTarefa: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              TabOrder = 1
+              Position.X = 344.000000000000000000
+              Position.Y = 8.000000000000000000
+              Size.Width = 33.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object mmoComentario: TMemo
+              Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]
+              DataDetectorTypes = []
+              Position.X = 32.000000000000000000
+              Position.Y = 56.000000000000000000
+              Size.Width = 321.000000000000000000
+              Size.Height = 369.000000000000000000
+              Size.PlatformDefault = False
+              TabOrder = 2
+              Viewport.Width = 313.000000000000000000
+              Viewport.Height = 361.000000000000000000
+            end
+          end
+          object lytButtons: TLayout
+            Align = MostBottom
+            Margins.Bottom = 15.000000000000000000
+            Position.Y = 448.000000000000000000
+            Size.Width = 384.000000000000000000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object rndrctSalvar: TRoundRect
+              Align = Center
+              Fill.Color = claMediumseagreen
+              Margins.Top = 3.000000000000000000
+              Margins.Bottom = 3.000000000000000000
+              Size.Width = 245.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              Stroke.Kind = None
+              object btnSalvar: TSpeedButton
+                Align = Center
+                Size.Width = 217.000000000000000000
+                Size.Height = 48.000000000000000000
+                Size.PlatformDefault = False
+                object lblBtnSalvar: TLabel
+                  Align = Client
+                  StyledSettings = [Family, Size, Style]
+                  Size.Width = 217.000000000000000000
+                  Size.Height = 48.000000000000000000
+                  Size.PlatformDefault = False
+                  TextSettings.FontColor = claWhite
+                  TextSettings.HorzAlign = Center
+                  Text = 'Salvar'
+                  TabOrder = 0
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

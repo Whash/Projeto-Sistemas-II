@@ -1,0 +1,21 @@
+program prjOrganizZer;
+
+
+
+uses
+  System.StartUpCopy,
+  FMX.Forms,
+  uFrmBase in 'Base\uFrmBase.pas' {frmBase},
+  uDmCon in 'Conexao\uDmCon.pas' {dmCon: TDataModule},
+  uFrmQuadroTarefas in 'Telas\Quadro_Tarefas\uFrmQuadroTarefas.pas' {frmQuadroTarefas},
+  uFrmCadQuadroTarefas in 'Telas\Quadro_Tarefas\uFrmCadQuadroTarefas.pas' {frmCadQuadroTarefas},
+  uFrmEtapas in 'Telas\Etapas\uFrmEtapas.pas' {frmEtapas};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.CreateForm(TdmCon, dmCon);
+  Application.CreateForm(TfrmQuadroTarefas, frmQuadroTarefas);
+  Application.Run;
+end.

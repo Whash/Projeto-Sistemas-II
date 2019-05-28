@@ -1,0 +1,40 @@
+unit uFrmCadSubtarefas;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants, 
+  FMX.Types, FMX.Graphics, FMX.Controls, FMX.Forms, FMX.Dialogs, FMX.StdCtrls,
+  uFrmBase, System.Actions, FMX.ActnList, FMX.TabControl, FMX.Edit, FMX.Objects,
+  FMX.Controls.Presentation, FMX.EditBox, FMX.NumberBox, FMX.Layouts;
+
+type
+  TfrmCadSubtarefas = class(TfrmBase)
+    rctnglPrincpal: TRectangle;
+    lytFormulario: TLayout;
+    edtNome: TEdit;
+    nmbrbxPosicao: TNumberBox;
+    lblNome: TLabel;
+    lblPosicao: TLabel;
+    edtCodTarefa: TEdit;
+    lytButtons: TLayout;
+    rndrctSalvar: TRoundRect;
+    btnSalvar: TSpeedButton;
+    lblBtnSalvar: TLabel;
+    btnExcluir: TSpeedButton;
+    btnVoltar: TSpeedButton;
+    chkConcluida: TCheckBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmCadSubtarefas: TfrmCadSubtarefas;
+
+implementation
+
+{$R *.fmx}
+
+end.

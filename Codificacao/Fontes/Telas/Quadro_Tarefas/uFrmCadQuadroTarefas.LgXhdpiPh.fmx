@@ -7,7 +7,10 @@ inherited frmCadQuadroTarefas_LgXhdpiPh: TfrmCadQuadroTarefas_LgXhdpiPh
     inherited rctnglTopoPrincipal: TRectangle
       Size.Width = 450.000000000000000000
       inherited lblTopoPrincipal: TLabel
-        Size.Width = 450.000000000000000000
+        Size.Width = 354.000000000000000000
+      end
+      inherited btnExcluir: TSpeedButton
+        Position.X = 402.000000000000000000
       end
     end
   end
@@ -23,22 +26,19 @@ inherited frmCadQuadroTarefas_LgXhdpiPh: TfrmCadQuadroTarefas_LgXhdpiPh
       inherited pnlPrincipal: TPanel
         Size.Width = 450.000000000000000000
         Size.Height = 647.000000000000000000
-        inherited lytButtons: TLayout
-          Position.Y = 576.000000000000000000
+        inherited rctnglPrincpal: TRectangle
           Size.Width = 450.000000000000000000
-          inherited crclCancelar: TCircle
-            Size.Width = 190.000000000000000000
-            Size.Height = 30.294746398925780000
+          Size.Height = 647.000000000000000000
+          inherited lytFormulario: TLayout
+            Size.Width = 450.000000000000000000
+            Size.Height = 576.000000000000000000
           end
-        end
-        inherited lytFormulario: TLayout
-          Size.Width = 450.000000000000000000
-          Size.Height = 576.000000000000000000
-          inherited edtNome: TEdit
-            Size.Width = 323.000000000000000000
-          end
-          inherited nmbrbxPosicao: TNumberBox
-            Size.Width = 323.000000000000000000
+          inherited lytButtons: TLayout
+            Position.Y = 576.000000000000000000
+            Size.Width = 450.000000000000000000
+            inherited rndrctSalvar: TRoundRect
+              Margins.Right = 3.000000000000000000
+            end
           end
         end
       end

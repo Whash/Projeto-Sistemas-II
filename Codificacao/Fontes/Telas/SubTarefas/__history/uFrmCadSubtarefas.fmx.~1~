@@ -1,0 +1,13 @@
+inherited frmCadSubtarefas: TfrmCadSubtarefas
+  Caption = 'frmBase1'
+  DesignerMasterStyle = 3
+  inherited tbcPrincipal: TTabControl
+    Sizes = (
+      384s
+      519s)
+    inherited tbiPrincipal: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+    end
+  end
+end

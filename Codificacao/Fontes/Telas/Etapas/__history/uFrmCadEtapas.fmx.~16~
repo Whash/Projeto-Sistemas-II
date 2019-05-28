@@ -1,0 +1,145 @@
+inherited frmCadEtapas: TfrmCadEtapas
+  Caption = 'frmBase1'
+  DesignerMasterStyle = 3
+  inherited tlbTopoPrincipal: TToolBar
+    inherited rctnglTopoPrincipal: TRectangle
+      inherited lblTopoPrincipal: TLabel
+        Text = 'Cadastro de Etapas'
+      end
+      object btnExcluir: TSpeedButton
+        Align = FitRight
+        StyledSettings = [Family, Size, Style]
+        IconTintColor = claWhite
+        Position.X = 336.000000000000000000
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'trashtoolbutton'
+        Text = 'btnExcluir'
+        TextSettings.FontColor = claWhite
+        OnClick = btnExcluirClick
+      end
+      object btnVoltar: TSpeedButton
+        Align = FitLeft
+        IconTintColor = claWhite
+        Size.Width = 48.000000000000000000
+        Size.Height = 48.000000000000000000
+        Size.PlatformDefault = False
+        StyleLookup = 'backtoolbutton'
+        OnClick = btnVoltarClick
+      end
+    end
+  end
+  inherited tbcPrincipal: TTabControl
+    Sizes = (
+      384s
+      519s)
+    inherited tbiPrincipal: TTabItem
+      ExplicitSize.cx = 8.000000000000000000
+      ExplicitSize.cy = 8.000000000000000000
+      inherited pnlPrincipal: TPanel
+        object rctnglPrincpal: TRectangle
+          Align = Client
+          Fill.Color = claWhite
+          Size.Width = 384.000000000000000000
+          Size.Height = 519.000000000000000000
+          Size.PlatformDefault = False
+          Stroke.Kind = None
+          OnClick = rctnglPrincpalClick
+          object lytFormulario: TLayout
+            Align = Client
+            Size.Width = 384.000000000000000000
+            Size.Height = 448.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 0
+            object edtNome: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Anchors = [akLeft, akTop, akRight]
+              TabOrder = 0
+              Position.X = 64.000000000000000000
+              Position.Y = 53.000000000000000000
+              Size.Width = 265.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object nmbrbxPosicao: TNumberBox
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              Anchors = [akLeft, akTop, akRight]
+              TabOrder = 1
+              Cursor = crIBeam
+              Position.X = 64.000000000000000000
+              Position.Y = 143.000000000000000000
+              Size.Width = 265.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+            end
+            object lblNome: TLabel
+              Position.X = 64.000000000000000000
+              Position.Y = 25.000000000000000000
+              Size.Width = 257.000000000000000000
+              Size.Height = 23.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Nome'
+              TabOrder = 2
+            end
+            object lblPosicao: TLabel
+              Position.X = 64.000000000000000000
+              Position.Y = 115.000000000000000000
+              Size.Width = 257.000000000000000000
+              Size.Height = 23.000000000000000000
+              Size.PlatformDefault = False
+              Text = 'Posi'#231#227'o'
+              TabOrder = 3
+            end
+            object edtCodQuadroTarefas: TEdit
+              Touch.InteractiveGestures = [LongTap, DoubleTap]
+              TabOrder = 4
+              Position.X = 64.000000000000000000
+              Position.Y = 200.000000000000000000
+              Size.Width = 265.000000000000000000
+              Size.Height = 32.000000000000000000
+              Size.PlatformDefault = False
+            end
+          end
+          object lytButtons: TLayout
+            Align = MostBottom
+            Margins.Bottom = 15.000000000000000000
+            Position.Y = 448.000000000000000000
+            Size.Width = 384.000000000000000000
+            Size.Height = 56.000000000000000000
+            Size.PlatformDefault = False
+            TabOrder = 1
+            object rndrctSalvar: TRoundRect
+              Align = Center
+              Fill.Color = claMediumseagreen
+              Margins.Top = 3.000000000000000000
+              Margins.Bottom = 3.000000000000000000
+              Size.Width = 245.000000000000000000
+              Size.Height = 50.000000000000000000
+              Size.PlatformDefault = False
+              Stroke.Kind = None
+              object btnSalvar: TSpeedButton
+                Align = Center
+                Size.Width = 217.000000000000000000
+                Size.Height = 48.000000000000000000
+                Size.PlatformDefault = False
+                OnClick = btnSalvarClick
+                object lblBtnSalvar: TLabel
+                  Align = Client
+                  StyledSettings = [Family, Size, Style]
+                  Size.Width = 217.000000000000000000
+                  Size.Height = 48.000000000000000000
+                  Size.PlatformDefault = False
+                  TextSettings.FontColor = claWhite
+                  TextSettings.HorzAlign = Center
+                  Text = 'Salvar'
+                  TabOrder = 0
+                end
+              end
+            end
+          end
+        end
+      end
+    end
+  end
+end

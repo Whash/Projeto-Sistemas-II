@@ -15,7 +15,6 @@ type
     lytButtons: TLayout;
     crclCancelar: TCircle;
     rndrctSalvar: TRoundRect;
-    lytCancelarTopo: TLayout;
     lbl1: TLabel;
     lblBtnSalvar: TLabel;
     btnSalvar: TSpeedButton;
@@ -28,15 +27,20 @@ type
     lblNome: TLabel;
     lblCor: TLabel;
     lblPosicao: TLabel;
+    rctnglPrincpal: TRectangle;
+    btnExcluir: TSpeedButton;
     procedure btnVoltarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure btnSalvarClick(Sender: TObject);
+    procedure btnExcluirClick(Sender: TObject);
+    procedure rctnglPrincpalClick(Sender: TObject);
   private
     { Private declarations }
     procedure loadRecord();
     procedure saveRecord();
     procedure changeRecord();
+    procedure removeRecord();
     procedure closeWindow();
     function checkCampos(): Boolean;
   public
@@ -72,18 +76,48 @@ begin
   end;
 end;
 
-procedure TfrmCadQuadroTarefas.btnSalvarClick(Sender: TObject);
+procedure TfrmCadQuadroTarefas.btnExcluirClick(Sender: TObject);
 begin
   try
     try
       inherited;
 
-      if edtCodigo.Text <> '' then
-        changeRecord()
-      else
-        saveRecord();
+      removeRecord();
     except
-       on E: Exception do
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.btnExcluirClick;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadQuadroTarefas.btnSalvarClick(Sender: TObject);
+var
+  CamposValidos: Boolean;
+begin
+  try
+    try
+      inherited;
+
+      Defocus();
+
+      CamposValidos := checkCampos();
+
+      if CamposValidos then
+      begin
+        if edtCodigo.Text <> '' then
+          changeRecord()
+        else
+          saveRecord();
+      end
+      else
+      begin
+        ShowMessage('Valores inválidos!');
+      end;
+    except
+      on E: Exception do
       begin
         E.Message := E.Message + ' - ' + Self.ClassName+'.btnSalvarClick;';
       end;
@@ -112,8 +146,12 @@ procedure TfrmCadQuadroTarefas.closeWindow;
 begin
   try
     try
-      Self.Close;
       frmQuadroTarefas.loadRecords();
+      edtCodigo.Text         := '';
+      edtNome.Text           := '';
+      nmbrbxPosicao.Value    := 0;
+      cmbclrbxColorBox.Color := StringToAlphaColor('White');
+      Self.Close;
     except
       on E: Exception do
       begin
@@ -130,6 +168,11 @@ begin
     try
       inherited;
       loadRecord();
+
+      if edtCodigo.Text <> '' then
+        btnExcluir.Visible := True
+      else
+        btnExcluir.Visible := False;
     except
       on E: Exception do
       begin
@@ -154,7 +197,7 @@ begin
         Campo   := 'CODIGO, NOME, POSICAO, COR';
         Tabela  := 'QUADRO_TAREFA';
         Inner   := '';
-        Where   := 'CODIGO = ' + edtCodigo.Text;
+        Where   := 'AND CODIGO = ' + QuotedStr(edtCodigo.Text);
         OrderBy := '';
 
         dsDados := selectRecord(Campo, Tabela, Inner, Where, OrderBy);
@@ -196,6 +239,52 @@ begin
   end;
 end;
 
+procedure TfrmCadQuadroTarefas.rctnglPrincpalClick(Sender: TObject);
+begin
+  try
+    try
+      inherited;
+
+      Defocus();
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.rctnglPrincpalClick;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmCadQuadroTarefas.removeRecord;
+var
+  Tabela, Where: string;
+  Deletado: Boolean;
+begin
+  try
+    try
+      Tabela := 'QUADRO_TAREFA';
+      Where  := 'AND CODIGO = ' + QuotedStr(edtCodigo.Text);
+
+      Deletado := deleteRecord(Tabela, Where);
+
+      if Deletado then
+      begin
+        ShowMessage('Registro excluido com sucesso!');
+        closeWindow();
+      end
+      else
+        ShowMessage('Erro ao excluir o registro!');
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.removeRecord;';
+      end;
+    end;
+  finally
+  end;
+end;
+
 procedure TfrmCadQuadroTarefas.saveRecord;
 var
   Tabela, Campos, Valores: string;
@@ -205,7 +294,7 @@ begin
     try
       Tabela   := 'QUADRO_TAREFA';
       Campos   := 'NOME, POSICAO, COR';
-      Valores  := QuotedStr(edtNome.Text) + ', ' + FloatToStr(nmbrbxPosicao.Value) + ', ' + QuotedStr(ColorToString(cmbclrbxColorBox.Color));
+      Valores  := QuotedStr(edtNome.Text) + ', ' + QuotedStr(FloatToStr(nmbrbxPosicao.Value)) + ', ' + QuotedStr(ColorToString(cmbclrbxColorBox.Color));
 
       Inserido := insertRecord(Tabela, Campos, Valores);
 
@@ -235,8 +324,8 @@ begin
   try
     try
       Tabela       := 'QUADRO_TAREFA';
-      CampoValores := 'NOME = ' + QuotedStr(edtNome.Text) + ', POSICAO = ' + FloatToStr(nmbrbxPosicao.Value) + ', COR = ' + QuotedStr(ColorToString(cmbclrbxColorBox.Color));
-      Where        := 'AND CODIGO = ' + edtCodigo.Text;
+      CampoValores := 'NOME = ' + QuotedStr(edtNome.Text) + ', POSICAO = ' + QuotedStr(FloatToStr(nmbrbxPosicao.Value)) + ', COR = ' + QuotedStr(ColorToString(cmbclrbxColorBox.Color));
+      Where        := 'AND CODIGO = ' + QuotedStr(edtCodigo.Text);
 
       Atualizado := updateRecord(Tabela, CampoValores, Where);
 
@@ -262,6 +351,13 @@ function TfrmCadQuadroTarefas.checkCampos: Boolean;
 begin
   try
     try
+      Result := True;
+
+      if edtNome.Text = '' then
+        Result := False;
+
+      if nmbrbxPosicao.Value = 0 then
+        Result := False;
 
     except
       on E: Exception do
