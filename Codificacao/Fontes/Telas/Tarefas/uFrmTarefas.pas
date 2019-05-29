@@ -29,6 +29,8 @@ type
     procedure btnVoltarClick(Sender: TObject);
     procedure btnEditarClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure closeWindow();
@@ -340,7 +342,10 @@ var
 begin
   try
     try
-      Porcentagem := (Marcados / Total) * 100;
+      if Total = 0 then
+        Porcentagem := 0
+      else
+        Porcentagem := (Marcados / Total) * 100;
       pbPorcentagem.Value := Porcentagem;
       lblPorcentagem.Text := FormatFloat('##0', Porcentagem) + '%';
 
@@ -480,6 +485,27 @@ begin
   end;
 end;
 
+procedure TfrmTarefas.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  try
+    try
+      inherited;
+      if Key = vkHardwareBack then
+      begin
+        closeWindow();
+        key := 0;
+      end;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.FormKeyUp;';
+      end;
+    end;
+  finally
+  end;
+end;
+
 procedure TfrmTarefas.FormShow(Sender: TObject);
 begin
   try
@@ -527,7 +553,7 @@ begin
       Tabela  := 'COMENTARIO';
       Inner   := '';
       Where   := 'AND COD_TAREFA = ' + QuotedStr(edtCodigo.Text);
-      OrderBy := '';
+      OrderBy := 'ORDER BY CODIGO DESC';
 
       dsDados := selectRecord(Campo, Tabela, Inner, Where, OrderBy);
 
@@ -574,6 +600,8 @@ begin
 
         loadSubTarefas();
         loadComentarios();
+
+        Self.OnChangeCheckBox(lstBoxPrincipal);
       end;
     except
       on E: Exception do

@@ -1,5 +1,6 @@
 inherited frmTarefas: TfrmTarefas
   Caption = 'frmBase1'
+  OnKeyUp = FormKeyUp
   DesignerMasterStyle = 3
   inherited tlbTopoPrincipal: TToolBar
     inherited rctnglTopoPrincipal: TRectangle
@@ -148,8 +149,8 @@ inherited frmTarefas: TfrmTarefas
                 Size.Height = 127.000000000000000000
                 Size.PlatformDefault = False
                 TabOrder = 0
-                Viewport.Width = 374.000000000000000000
-                Viewport.Height = 127.000000000000000000
+                Viewport.Width = 366.000000000000000000
+                Viewport.Height = 119.000000000000000000
               end
             end
             object stylbkGroupHeader: TStyleBook

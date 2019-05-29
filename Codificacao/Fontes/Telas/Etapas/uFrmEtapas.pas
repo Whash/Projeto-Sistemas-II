@@ -25,6 +25,8 @@ type
     procedure btnAddEtapasClick(Sender: TObject);
     procedure lstBoxPrincipalItemClick(const Sender: TCustomListBox;
       const Item: TListBoxItem);
+    procedure FormKeyUp(Sender: TObject; var Key: Word; var KeyChar: Char;
+      Shift: TShiftState);
   private
     { Private declarations }
     procedure ListBoxGroupHeaderApplyStyleLookup(Sender: TObject);
@@ -227,6 +229,27 @@ begin
       on E: Exception do
       begin
         E.Message := E.Message + ' - ' + Self.ClassName+'.createTarefas;';
+      end;
+    end;
+  finally
+  end;
+end;
+
+procedure TfrmEtapas.FormKeyUp(Sender: TObject; var Key: Word;
+  var KeyChar: Char; Shift: TShiftState);
+begin
+  try
+    try
+      inherited;
+      if Key = vkHardwareBack then
+      begin
+        closeWindow();
+        key := 0;
+      end;
+    except
+      on E: Exception do
+      begin
+        E.Message := E.Message + ' - ' + Self.ClassName+'.FormKeyUp;';
       end;
     end;
   finally

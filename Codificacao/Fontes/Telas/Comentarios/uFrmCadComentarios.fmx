@@ -65,11 +65,12 @@ inherited frmCadComentarios: TfrmCadComentarios
             object edtCodTarefa: TEdit
               Touch.InteractiveGestures = [LongTap, DoubleTap]
               TabOrder = 1
-              Position.X = 344.000000000000000000
-              Position.Y = 8.000000000000000000
+              Position.X = 8.000000000000000000
+              Position.Y = 16.000000000000000000
               Size.Width = 33.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
+              Visible = False
             end
             object mmoComentario: TMemo
               Touch.InteractiveGestures = [Pan, LongTap, DoubleTap]

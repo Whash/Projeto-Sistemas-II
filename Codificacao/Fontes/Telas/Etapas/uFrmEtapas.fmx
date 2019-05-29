@@ -1,6 +1,7 @@
 inherited frmEtapas: TfrmEtapas
   Caption = 'frmBase1'
   StyleBook = stylbkGroupHeader
+  OnKeyUp = FormKeyUp
   DesignerMasterStyle = 3
   inherited tlbTopoPrincipal: TToolBar
     inherited rctnglTopoPrincipal: TRectangle

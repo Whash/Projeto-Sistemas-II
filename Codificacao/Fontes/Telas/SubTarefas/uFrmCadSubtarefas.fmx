@@ -101,6 +101,7 @@ inherited frmCadSubtarefas: TfrmCadSubtarefas
               Size.Width = 33.000000000000000000
               Size.Height = 32.000000000000000000
               Size.PlatformDefault = False
+              Visible = False
             end
             object chkConcluida: TCheckBox
               Anchors = [akLeft, akTop, akRight]
