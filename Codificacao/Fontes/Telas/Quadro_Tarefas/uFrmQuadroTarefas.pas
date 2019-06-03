@@ -47,6 +47,7 @@ begin
   try
     try
       //Application.CreateForm(TfrmCadQuadroTarefas, frmCadQuadroTarefas);
+      frmCadQuadroTarefas.FormShow(frmCadQuadroTarefas);
       frmCadQuadroTarefas.Show;
     except
       on E: Exception do
@@ -68,6 +69,7 @@ begin
 
       //Application.CreateForm(TfrmCadQuadroTarefas, frmCadQuadroTarefas);
       frmCadQuadroTarefas.edtCodigo.Text := IntToStr(Botao.Tag);
+      frmCadQuadroTarefas.FormShow(frmCadQuadroTarefas);
       frmCadQuadroTarefas.Show;
 
 
@@ -216,6 +218,7 @@ begin
       CodItem := lstBoxPrincipal.ItemByIndex(lstBoxPrincipal.ItemIndex).Tag.ToString();
       //Application.CreateForm(TfrmEtapas, frmEtapas);
       frmEtapas.edtCodigo.Text := CodItem;
+      frmEtapas.FormShow(frmEtapas);
       frmEtapas.Show;
     except
       on E: Exception do

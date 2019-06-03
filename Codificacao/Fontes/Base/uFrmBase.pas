@@ -208,7 +208,7 @@ function TfrmBase.updateRecord(Tabela, CampoValores, Where: string): Boolean;
 var
   qryUpdateRecord: TFDQuery;
   cmdSQL: string;
-  begin
+begin
   try
     try
       qryUpdateRecord := TFDQuery.Create(nil);
